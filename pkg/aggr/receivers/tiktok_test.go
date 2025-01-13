@@ -12,8 +12,11 @@ import (
 func TestTiktok(t *testing.T) {
 	l := &gotiktoklive.Live{Events: make(chan interface{})}
 	go func() {
-		l.Events <- gotiktoklive.ChatEvent{Comment: "Hi Tik"}
-		l.Events <- gotiktoklive.ChatEvent{Comment: "Hi Tik"}
+		l.Events <- gotiktoklive.ChatEvent{
+			Comment: "Hi Tik",
+			User:    &gotiktoklive.User{Nickname: "someone"},
+		}
+		l.Events <- gotiktoklive.ChatEvent{Comment: "Hi Tik 2"}
 	}()
 
 	c := make(chan aggr.Message)
@@ -35,6 +38,14 @@ l:
 	}
 
 	if got, want := len(msgs), 2; got != want {
+		t.Errorf("want %v, got %v", want, got)
+	}
+
+	if got, want := msgs[0].Text, "Hi Tik"; got != want {
+		t.Errorf("want %v, got %v", want, got)
+	}
+
+	if got, want := msgs[0].User, "someone"; got != want {
 		t.Errorf("want %v, got %v", want, got)
 	}
 }

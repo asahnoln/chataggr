@@ -3,7 +3,9 @@
 package aggr
 
 // Message contains text from a chat
-type Message struct{}
+type Message struct {
+	User, Text string
+}
 
 // Receiver is a chat service.
 // Receiver should parse messages from a chat

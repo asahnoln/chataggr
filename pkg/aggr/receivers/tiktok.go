@@ -13,9 +13,14 @@ func NewTikTok(l *gotiktoklive.Live) *TikTok {
 
 func (r *TikTok) Receive(c chan aggr.Message) {
 	for event := range r.l.Events {
-		switch event.(type) {
+		switch e := event.(type) {
 		case gotiktoklive.ChatEvent:
-			c <- aggr.Message{}
+			m := aggr.Message{Text: e.Comment}
+			if e.User != nil {
+				m.User = e.User.Nickname
+			}
+
+			c <- m
 		}
 	}
 }
