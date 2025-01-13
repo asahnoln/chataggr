@@ -1,4 +1,4 @@
-package streamer
+package aggr
 
 // Message contains text from a chat
 type Message struct{}

@@ -1,21 +1,21 @@
-package streamer_test
+package aggr_test
 
 import (
 	"testing"
 	"time"
 
-	"github.com/asahnoln/streamer-chat-go/pkg/streamer"
+	"github.com/asahnoln/chataggr/pkg/aggr"
 )
 
 func TestRun(t *testing.T) {
-	c := make(chan streamer.Message)
-	go streamer.Run([]streamer.Receiver{
+	c := make(chan aggr.Message)
+	go aggr.Run([]aggr.Receiver{
 		&stubSlowMessager{},
-		&stubMessager{msgs: []streamer.Message{{}, {}}},
-		&stubMessager{msgs: []streamer.Message{{}}},
+		&stubMessager{msgs: []aggr.Message{{}, {}}},
+		&stubMessager{msgs: []aggr.Message{{}}},
 	}, c)
 
-	msgs := []streamer.Message{}
+	msgs := []aggr.Message{}
 	timer := time.NewTimer(1 * time.Millisecond)
 
 l:
@@ -34,10 +34,10 @@ l:
 }
 
 type stubMessager struct {
-	msgs []streamer.Message
+	msgs []aggr.Message
 }
 
-func (m *stubMessager) Receive(c chan streamer.Message) {
+func (m *stubMessager) Receive(c chan aggr.Message) {
 	for _, msg := range m.msgs {
 		c <- msg
 	}
@@ -45,6 +45,6 @@ func (m *stubMessager) Receive(c chan streamer.Message) {
 
 type stubSlowMessager struct{}
 
-func (m *stubSlowMessager) Receive(c chan streamer.Message) {
+func (m *stubSlowMessager) Receive(c chan aggr.Message) {
 	time.Sleep(1 * time.Second)
 }

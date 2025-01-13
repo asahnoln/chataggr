@@ -1,3 +1,3 @@
-module github.com/asahnoln/streamer-chat-go
+module github.com/asahnoln/chataggr
 
 go 1.23.4
