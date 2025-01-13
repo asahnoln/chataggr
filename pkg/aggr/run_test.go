@@ -9,7 +9,7 @@ import (
 
 func TestRun(t *testing.T) {
 	c := make(chan aggr.Message)
-	go aggr.Run([]aggr.Receiver{
+	aggr.Run([]aggr.Receiver{
 		&stubSlowMessager{},
 		&stubMessager{msgs: []aggr.Message{{}, {}}},
 		&stubMessager{msgs: []aggr.Message{{}}},

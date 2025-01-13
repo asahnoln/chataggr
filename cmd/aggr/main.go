@@ -19,7 +19,7 @@ func main() {
 	rtt := receivers.NewTikTok(live)
 
 	c := make(chan aggr.Message)
-	go aggr.Run([]aggr.Receiver{rtt}, c)
+	aggr.Run([]aggr.Receiver{rtt}, c)
 
 	for m := range c {
 		fmt.Printf("%s: %s\n", m.User, m.Text)
