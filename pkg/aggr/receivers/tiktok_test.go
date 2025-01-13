@@ -1,0 +1,40 @@
+package receivers_test
+
+import (
+	"testing"
+	"time"
+
+	"github.com/Davincible/gotiktoklive"
+	"github.com/asahnoln/chataggr/pkg/aggr"
+	"github.com/asahnoln/chataggr/pkg/aggr/receivers"
+)
+
+func TestTiktok(t *testing.T) {
+	l := &gotiktoklive.Live{Events: make(chan interface{})}
+	go func() {
+		l.Events <- gotiktoklive.ChatEvent{Comment: "Hi Tik"}
+		l.Events <- gotiktoklive.ChatEvent{Comment: "Hi Tik"}
+	}()
+
+	c := make(chan aggr.Message)
+	r := receivers.NewTikTok(l)
+
+	aggr.Run([]aggr.Receiver{r}, c)
+
+	msgs := []aggr.Message{}
+	timer := time.NewTimer(1 * time.Millisecond)
+
+l:
+	for {
+		select {
+		case m := <-c:
+			msgs = append(msgs, m)
+		case <-timer.C:
+			break l
+		}
+	}
+
+	if got, want := len(msgs), 2; got != want {
+		t.Errorf("want %v, got %v", want, got)
+	}
+}
