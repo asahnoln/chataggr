@@ -9,7 +9,7 @@ import (
 
 func TestRun(t *testing.T) {
 	c := make(chan streamer.Message)
-	go streamer.Run([]streamer.Messager{
+	go streamer.Run([]streamer.Receiver{
 		&stubSlowMessager{},
 		&stubMessager{msgs: []streamer.Message{{}, {}}},
 		&stubMessager{msgs: []streamer.Message{{}}},
