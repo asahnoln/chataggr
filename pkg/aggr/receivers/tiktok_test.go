@@ -9,6 +9,7 @@ import (
 	"github.com/asahnoln/chataggr/pkg/aggr/receivers"
 )
 
+// FIX: gotiktoklive doesn't work anymore
 func TestTiktok(t *testing.T) {
 	l := &gotiktoklive.Live{Events: make(chan interface{})}
 	go func() {

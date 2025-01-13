@@ -1,16 +1,6 @@
 # TODO
 
-```go
-select {
-case m := <-c:
-  output m
-case <-quit:
-  quit
-}
-```
-
-- [ ] streamer.run([]Service)
-- [ ] text
-- [ ] text
-- [ ] text
-- [ ] text
+- [x] aggr.run([]receivers, channel)
+- [ ] twitch receiver
+- [ ] tiktok recevier
+- [ ] play sound on message received
