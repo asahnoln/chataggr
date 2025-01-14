@@ -8,9 +8,6 @@ import (
 	"github.com/asahnoln/chataggr/pkg/aggr/receivers"
 )
 
-// Connect to ws
-// wss://eventsub.wss.twitch.tv/ws
-
 func TestTwitch(t *testing.T) {
 	c := make(chan aggr.Message)
 	r := receivers.NewTwitch(&stubTwitchWSConn{})
@@ -31,15 +28,15 @@ l:
 	}
 
 	if got, want := len(msgs), 2; got != want {
-		t.Errorf("want %v, got %v", want, got)
+		t.Errorf("want len %v, got %v", want, got)
 	}
 
 	if got, want := msgs[0].Text, "Hi chat"; got != want {
-		t.Errorf("want %v, got %v", want, got)
+		t.Errorf("want text %v, got %v", want, got)
 	}
 
 	if got, want := msgs[0].User, "TwitchDev"; got != want {
-		t.Errorf("want %v, got %v", want, got)
+		t.Errorf("want name %v, got %v", want, got)
 	}
 }
 
