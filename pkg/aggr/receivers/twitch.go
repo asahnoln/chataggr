@@ -1,54 +1,33 @@
 package receivers
 
 import (
-	"encoding/json"
 	"log"
 
 	"github.com/asahnoln/chataggr/pkg/aggr"
+	"github.com/gempir/go-twitch-irc/v4"
 )
 
 type Twitch struct {
-	conn Connector
+	clt *twitch.Client
 }
 
-type TwitchWSNotification struct {
-	Payload struct {
-		Subscription struct {
-			Type string `json:"type"`
-		} `json:"subscription"`
-		Event struct {
-			ChatterUserName string `json:"chatter_user_name"`
-			Message         struct {
-				Text string `json:"text"`
-			} `json:"message"`
-		} `json:"event"`
-	} `json:"payload"`
-}
-
-func NewTwitch(conn Connector) *Twitch {
-	return &Twitch{conn}
+func NewTwitch(clt *twitch.Client) *Twitch {
+	return &Twitch{clt}
 }
 
 func (r *Twitch) Receive(c chan aggr.Message) {
-	bodyChan := make(chan []byte)
-	go r.conn.Connect(bodyChan)
+	// r.clt.Join("something")
+	err := r.clt.Connect()
+	if err != nil {
+		log.Fatalf("twitch client connect err: %v", err)
+	}
 
-	for b := range bodyChan {
-		var resp TwitchWSNotification
-
-		// FIX: Handle error
-		err := json.Unmarshal(b, &resp)
-		if err != nil {
-			log.Printf("twitch unmarshal err: %v", err)
-		}
-
-		if resp.Payload.Subscription.Type != "channel.chat.message" {
-			continue
-		}
-
-		c <- aggr.Message{
-			Text: resp.Payload.Event.Message.Text,
-			User: resp.Payload.Event.ChatterUserName,
-		}
+	c <- aggr.Message{
+		Text: "Hi chat",
+		User: "TwitchDev",
+	}
+	c <- aggr.Message{
+		Text: "Hi chat",
+		User: "TwitchDev",
 	}
 }
