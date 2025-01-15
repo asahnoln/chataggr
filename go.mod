@@ -4,7 +4,7 @@ go 1.23.4
 
 require (
 	github.com/Davincible/gotiktoklive v0.0.0-20220912110424-b8ef93c5dde2
-	github.com/gempir/go-twitch-irc/v4 v4.2.0
+	github.com/gorilla/websocket v1.5.3
 )
 
 require (

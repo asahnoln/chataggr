@@ -4,23 +4,27 @@ import (
 	"log"
 
 	"github.com/asahnoln/chataggr/pkg/aggr"
-	"github.com/gempir/go-twitch-irc/v4"
+	"github.com/gorilla/websocket"
 )
 
 type Twitch struct {
-	clt *twitch.Client
+	url string
 }
 
-func NewTwitch(clt *twitch.Client) *Twitch {
-	return &Twitch{clt}
+func NewTwitch(url string) *Twitch {
+	return &Twitch{url}
 }
 
 func (r *Twitch) Receive(c chan aggr.Message) {
-	// r.clt.Join("something")
-	err := r.clt.Connect()
+	// FIX: Handle error
+	conn, _, err := websocket.DefaultDialer.Dial(r.url, nil)
 	if err != nil {
-		log.Fatalf("twitch client connect err: %v", err)
+		log.Fatalf("ws dial err: %v", err)
 	}
+	defer conn.Close()
+
+	// TODO: go func reading incoming messages
+	conn.WriteMessage(websocket.TextMessage, []byte("PASS SCHMOOPIIE"))
 
 	c <- aggr.Message{
 		Text: "Hi chat",

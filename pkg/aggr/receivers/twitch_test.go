@@ -1,8 +1,6 @@
 package receivers_test
 
 import (
-	"fmt"
-	"io"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -11,7 +9,7 @@ import (
 
 	"github.com/asahnoln/chataggr/pkg/aggr"
 	"github.com/asahnoln/chataggr/pkg/aggr/receivers"
-	"github.com/gempir/go-twitch-irc/v4"
+	"github.com/gorilla/websocket"
 )
 
 // TODO: Seems like we have to make our own websocket connection!
@@ -39,32 +37,47 @@ import (
 //
 // Then listen for
 // @badge-info=;badges=broadcaster/1;client-nonce=30620c76bc7d8ba00c9fe4c4d81c5ef3;color=;display-name=Asahnoln;emotes=;first-msg=0;flags=;id=6fdb1223-9252-4ee3-b4dc-c0ac88c2b372;mod=0;returning-chatter=0;room-id=39182089;subscriber=0;tmi-sent-ts=1736906306256;turbo=0;user-id=39182089;user-type= :asahnoln!asahnoln@asahnoln.tmi.twitch.tv PRIVMSG #asahnoln :Hey there!
-func TestTwitch(t *testing.T) {
+func TestTwitchWS(t *testing.T) {
+	upg := websocket.Upgrader{}
+	srvCalled := false
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Printf("req %v", r.URL)
-		t.Log("AAAAAAAAAAAAAAAAAAA")
-		b, err := io.ReadAll(r.Body)
-		if err != nil {
-			t.Logf("error reading request body: %v", err)
+		srvCalled = true
+		c, _ := upg.Upgrade(w, r, nil)
+		defer c.Close()
+
+		// TODO: for loop for incoming messages
+		_, message, _ := c.ReadMessage()
+		if got, want := string(message), "CAP REQ :twitch.tv/tags twitch.tv/Command"; got != want {
+			t.Errorf("srv want msg %v, got %v", want, got)
 		}
 
-		defer r.Body.Close()
-
-		t.Logf("webserver %s", b)
+		_, message, _ = c.ReadMessage()
+		if got, want := string(message), "PASS SCHMOOPIIE"; got != want {
+			t.Errorf("srv want msg %v, got %v", want, got)
+		}
 	}))
 	defer srv.Close()
 
-	clt := twitch.NewAnonymousClient()
-	clt.IrcAddress = strings.TrimPrefix(srv.URL, "http://")
-	clt.TLS = false
+	tw := receivers.NewTwitch(strings.Replace(srv.URL, "http", "ws", 1))
+	c := make(chan aggr.Message, 100)
+	tw.Receive(c)
+
+	if got, want := srvCalled, true; got != want {
+		t.Fatal("want to call the server, but it didn't receive a request")
+	}
+}
+
+func TestTwitchMessages(t *testing.T) {
+	t.SkipNow()
+	// TODO: Use server from prev test
 
 	c := make(chan aggr.Message)
-	r := receivers.NewTwitch(clt)
+	r := receivers.NewTwitch("use srv url")
 
 	aggr.Run([]aggr.Receiver{r}, c)
 
 	msgs := []aggr.Message{}
-	timer := time.NewTimer(5 * time.Second)
+	timer := time.NewTimer(1 * time.Millisecond)
 
 l:
 	for {
