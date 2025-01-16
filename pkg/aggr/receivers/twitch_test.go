@@ -41,20 +41,31 @@ func TestTwitchWS(t *testing.T) {
 	upg := websocket.Upgrader{}
 	srvCalled := false
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		testMsgs := []string{
+			"CAP REQ :twitch.tv/tags twitch.tv/Command",
+			"PASS SCHMOOPIIE",
+			"NICK justinfan8865",
+			"USER justinfan8865 8 * :justinfan8865",
+		}
 		srvCalled = true
 		c, _ := upg.Upgrade(w, r, nil)
 		defer c.Close()
 
 		// TODO: for loop for incoming messages
-		_, message, _ := c.ReadMessage()
-		if got, want := string(message), "CAP REQ :twitch.tv/tags twitch.tv/Command"; got != want {
-			t.Errorf("srv want msg %v, got %v", want, got)
+		for _, tm := range testMsgs {
+			mt, message, _ := c.ReadMessage()
+			if got, want := mt, websocket.TextMessage; got != want {
+				t.Errorf("srv want msg %v, got %v", want, got)
+			}
+			if got, want := string(message), tm; got != want {
+				t.Errorf("srv want msg %v, got %v", want, got)
+			}
 		}
 
-		_, message, _ = c.ReadMessage()
-		if got, want := string(message), "PASS SCHMOOPIIE"; got != want {
-			t.Errorf("srv want msg %v, got %v", want, got)
-		}
+		// _, message, _ = c.ReadMessage()
+		// if got, want := string(message), "PASS SCHMOOPIIE"; got != want {
+		// 	t.Errorf("srv want msg %v, got %v", want, got)
+		// }
 	}))
 	defer srv.Close()
 

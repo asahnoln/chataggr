@@ -24,7 +24,15 @@ func (r *Twitch) Receive(c chan aggr.Message) {
 	defer conn.Close()
 
 	// TODO: go func reading incoming messages
-	conn.WriteMessage(websocket.TextMessage, []byte("PASS SCHMOOPIIE"))
+	startMsgs := []string{
+		"CAP REQ :twitch.tv/tags twitch.tv/Command",
+		"PASS SCHMOOPIIE",
+		"NICK justinfan8865",
+		"USER justinfan8865 8 * :justinfan8865",
+	}
+	for _, msg := range startMsgs {
+		conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	}
 
 	c <- aggr.Message{
 		Text: "Hi chat",
