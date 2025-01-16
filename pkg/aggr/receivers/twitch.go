@@ -65,7 +65,7 @@ func sendConnectMsgsToTwitch(conn *websocket.Conn) {
 	}
 }
 
-func findSubstrBetween(s string, fromSubstr string, toSubstr string) string {
+func findSubstrBetween(s, fromSubstr, toSubstr string) string {
 	start := strings.Index(s, fromSubstr)
 	if start == -1 {
 		return ""
