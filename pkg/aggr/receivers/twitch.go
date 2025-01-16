@@ -43,20 +43,25 @@ func (r *Twitch) Receive(c chan aggr.Message) {
 		}
 
 		msg := string(data)
+		text := findValue(msg, "PRIVMSG #asahnoln :", "\r\n")
+		if text == "" {
+			continue
+		}
+
 		c <- aggr.Message{
-			Text: findValue(msg, "PRIVMSG #asahnoln :", ""),
+			Text: text,
 			User: findValue(msg, "display-name=", ";"),
 		}
 	}
 }
 
 func findValue(msg string, name string, sep string) string {
-	start := strings.Index(msg, name) + len(name)
-
-	if sep == "" {
-		return msg[start:]
+	start := strings.Index(msg, name)
+	if start == -1 {
+		return ""
 	}
 
+	start += len(name)
 	end := strings.Index(msg[start:], sep)
 	return msg[start:][:end]
 }

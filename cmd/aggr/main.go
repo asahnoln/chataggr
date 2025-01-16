@@ -21,12 +21,14 @@ func (r *stubInMemoryReceiver) Receive(c chan aggr.Message) {
 }
 
 func main() {
+	// simr := createStubInMemoryReceiver()
+
 	// FIX: gotiktoklive doesn't work anymore
 	// rtt := createTikTokReceiver()
-	simr := createStubInMemoryReceiver()
+	twr := createTwitchReceiver()
 
 	c := make(chan aggr.Message)
-	aggr.Run([]aggr.Receiver{simr}, c)
+	aggr.Run([]aggr.Receiver{twr}, c)
 
 	for m := range c {
 		fmt.Printf("%s [%s]: %s\n", m.User, time.Now().Format(time.TimeOnly), m.Text)
@@ -42,6 +44,10 @@ func createTikTokReceiver() *receivers.TikTok {
 	}
 
 	return receivers.NewTikTok(live)
+}
+
+func createTwitchReceiver() *receivers.Twitch {
+	return receivers.NewTwitch("wss://irc-ws.chat.twitch.tv/")
 }
 
 func createStubInMemoryReceiver() *stubInMemoryReceiver {

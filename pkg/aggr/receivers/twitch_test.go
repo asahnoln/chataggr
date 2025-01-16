@@ -55,8 +55,8 @@ func TestTwitchMessages(t *testing.T) {
 		c, _ := upg.Upgrade(w, r, nil)
 		defer c.Close()
 
-		c.WriteMessage(websocket.TextMessage, []byte("@badge-info=;badges=broadcaster/1;client-nonce=30620c76bc7d8ba00c9fe4c4d81c5ef3;color=;display-name=TwitchDev;emotes=;first-msg=0;flags=;id=6fdb1223-9252-4ee3-b4dc-c0ac88c2b372;mod=0;returning-chatter=0;room-id=39182089;subscriber=0;tmi-sent-ts=1736906306256;turbo=0;user-id=39182089;user-type= :asahnoln!asahnoln@asahnoln.tmi.twitch.tv PRIVMSG #asahnoln :Hi chat"))
-		c.WriteMessage(websocket.TextMessage, []byte("@badge-info=;badges=broadcaster/1;client-nonce=30620c76bc7d8ba00c9fe4c4d81c5ef3;color=;display-name=Asahnoln;emotes=;first-msg=0;flags=;id=6fdb1223-9252-4ee3-b4dc-c0ac88c2b372;mod=0;returning-chatter=0;room-id=39182089;subscriber=0;tmi-sent-ts=1736906306256;turbo=0;user-id=39182089;user-type= :asahnoln!asahnoln@asahnoln.tmi.twitch.tv PRIVMSG #asahnoln :Hey there!"))
+		c.WriteMessage(websocket.TextMessage, []byte("@badge-info=;badges=broadcaster/1;client-nonce=30620c76bc7d8ba00c9fe4c4d81c5ef3;color=;display-name=TwitchDev;emotes=;first-msg=0;flags=;id=6fdb1223-9252-4ee3-b4dc-c0ac88c2b372;mod=0;returning-chatter=0;room-id=39182089;subscriber=0;tmi-sent-ts=1736906306256;turbo=0;user-id=39182089;user-type= :asahnoln!asahnoln@asahnoln.tmi.twitch.tv PRIVMSG #asahnoln :Hi chat\r\n"))
+		c.WriteMessage(websocket.TextMessage, []byte("@badge-info=;badges=broadcaster/1;client-nonce=30620c76bc7d8ba00c9fe4c4d81c5ef3;color=;display-name=Asahnoln;emotes=;first-msg=0;flags=;id=6fdb1223-9252-4ee3-b4dc-c0ac88c2b372;mod=0;returning-chatter=0;room-id=39182089;subscriber=0;tmi-sent-ts=1736906306256;turbo=0;user-id=39182089;user-type= :asahnoln!asahnoln@asahnoln.tmi.twitch.tv PRIVMSG #asahnoln :Hey there!\r\n"))
 	}))
 	defer srv.Close()
 
@@ -88,5 +88,37 @@ l:
 
 	if got, want := msgs[0].User, "TwitchDev"; got != want {
 		t.Errorf("want name %v, got %v", want, got)
+	}
+}
+
+func TestTwitchOtherMessages(t *testing.T) {
+	upg := websocket.Upgrader{}
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		c, _ := upg.Upgrade(w, r, nil)
+		defer c.Close()
+
+		c.WriteMessage(websocket.TextMessage, []byte("something other than usual message"))
+	}))
+	defer srv.Close()
+
+	tw := receivers.NewTwitch(strings.Replace(srv.URL, "http", "ws", 1))
+	c := make(chan aggr.Message, 100)
+	go tw.Receive(c)
+
+	msgs := []aggr.Message{}
+	timer := time.NewTimer(1 * time.Millisecond)
+
+l:
+	for {
+		select {
+		case m := <-c:
+			msgs = append(msgs, m)
+		case <-timer.C:
+			break l
+		}
+	}
+
+	if got, want := len(msgs), 0; got != want {
+		t.Fatalf("want len %v, got %v", want, got)
 	}
 }
