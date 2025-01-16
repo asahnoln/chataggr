@@ -3,7 +3,6 @@ package receivers_test
 import (
 	"net/http"
 	"net/http/httptest"
-	"strings"
 	"testing"
 	"time"
 
@@ -40,7 +39,7 @@ func TestTwitchWS(t *testing.T) {
 	}))
 	defer srv.Close()
 
-	tw := receivers.NewTwitch(strings.Replace(srv.URL, "http", "ws", 1))
+	tw := receivers.NewTwitch(replaceHTTPWithWS(srv.URL))
 	c := make(chan aggr.Message, 100)
 	tw.Receive(c)
 
@@ -61,7 +60,7 @@ func TestTwitchMessages(t *testing.T) {
 	defer srv.Close()
 
 	c := make(chan aggr.Message)
-	r := receivers.NewTwitch(strings.Replace(srv.URL, "http", "ws", 1))
+	r := receivers.NewTwitch(replaceHTTPWithWS(srv.URL))
 
 	aggr.Run([]aggr.Receiver{r}, c)
 
@@ -101,7 +100,7 @@ func TestTwitchOtherMessages(t *testing.T) {
 	}))
 	defer srv.Close()
 
-	tw := receivers.NewTwitch(strings.Replace(srv.URL, "http", "ws", 1))
+	tw := receivers.NewTwitch(replaceHTTPWithWS(srv.URL))
 	c := make(chan aggr.Message, 100)
 	go tw.Receive(c)
 

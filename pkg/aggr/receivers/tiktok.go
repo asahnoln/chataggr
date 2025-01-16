@@ -1,26 +1,14 @@
 package receivers
 
 import (
-	"github.com/Davincible/gotiktoklive"
 	"github.com/asahnoln/chataggr/pkg/aggr"
 )
 
-type TikTok struct{ l *gotiktoklive.Live }
+type TikTok struct{}
 
-func NewTikTok(l *gotiktoklive.Live) *TikTok {
-	return &TikTok{l}
+func NewTikTok(url string) *TikTok {
+	return &TikTok{}
 }
 
 func (r *TikTok) Receive(c chan aggr.Message) {
-	for event := range r.l.Events {
-		switch e := event.(type) {
-		case gotiktoklive.ChatEvent:
-			m := aggr.Message{Text: e.Comment}
-			if e.User != nil {
-				m.User = e.User.Nickname
-			}
-
-			c <- m
-		}
-	}
 }

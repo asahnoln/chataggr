@@ -2,12 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"os/signal"
 	"time"
 
-	"github.com/Davincible/gotiktoklive"
 	"github.com/asahnoln/chataggr/pkg/aggr"
 	"github.com/asahnoln/chataggr/pkg/aggr/receivers"
 )
@@ -47,13 +45,7 @@ loop:
 
 // FIX: gotiktoklive doesn't work anymore
 func createTikTokReceiver() *receivers.TikTok {
-	tt := gotiktoklive.NewTikTok()
-	live, err := tt.TrackUser("asahnoln")
-	if err != nil {
-		log.Panicf("track user error: %v", err)
-	}
-
-	return receivers.NewTikTok(live)
+	return receivers.NewTikTok("tiktok url")
 }
 
 func createTwitchReceiver() *receivers.Twitch {
