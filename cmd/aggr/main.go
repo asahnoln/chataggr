@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
+	"os/signal"
 	"time"
 
 	"github.com/Davincible/gotiktoklive"
@@ -21,6 +23,8 @@ func (r *stubInMemoryReceiver) Receive(c chan aggr.Message) {
 }
 
 func main() {
+	interrupt := make(chan os.Signal, 1)
+	signal.Notify(interrupt, os.Interrupt)
 	// simr := createStubInMemoryReceiver()
 
 	// FIX: gotiktoklive doesn't work anymore
@@ -30,8 +34,14 @@ func main() {
 	c := make(chan aggr.Message)
 	aggr.Run([]aggr.Receiver{twr}, c)
 
-	for m := range c {
-		fmt.Printf("%s [%s]: %s\n", m.User, time.Now().Format(time.TimeOnly), m.Text)
+loop:
+	for {
+		select {
+		case m := <-c:
+			fmt.Printf("%s [%s]: %s\n", m.User, time.Now().Format(time.TimeOnly), m.Text)
+		case <-interrupt:
+			break loop
+		}
 	}
 }
 

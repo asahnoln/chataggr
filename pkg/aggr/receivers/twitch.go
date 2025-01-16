@@ -8,6 +8,14 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+var twitchConnectMsgs [5]string = [5]string{
+	"CAP REQ :twitch.tv/tags twitch.tv/Command",
+	"PASS SCHMOOPIIE",
+	"NICK justinfan8865",
+	"USER justinfan8865 8 * :justinfan8865",
+	"JOIN #asahnoln",
+}
+
 type Twitch struct {
 	url string
 }
@@ -17,23 +25,8 @@ func NewTwitch(url string) *Twitch {
 }
 
 func (r *Twitch) Receive(c chan aggr.Message) {
-	// FIX: Handle error
-	conn, _, err := websocket.DefaultDialer.Dial(r.url, nil)
-	if err != nil {
-		log.Fatalf("ws dial err: %v", err)
-	}
+	conn := connectToTwitch(r.url)
 	defer conn.Close()
-
-	startMsgs := []string{
-		"CAP REQ :twitch.tv/tags twitch.tv/Command",
-		"PASS SCHMOOPIIE",
-		"NICK justinfan8865",
-		"USER justinfan8865 8 * :justinfan8865",
-		"JOIN #asahnoln",
-	}
-	for _, msg := range startMsgs {
-		conn.WriteMessage(websocket.TextMessage, []byte(msg))
-	}
 
 	for {
 		_, data, err := conn.ReadMessage()
@@ -43,25 +36,42 @@ func (r *Twitch) Receive(c chan aggr.Message) {
 		}
 
 		msg := string(data)
-		text := findValue(msg, "PRIVMSG #asahnoln :", "\r\n")
+		text := findSubstrBetween(msg, "PRIVMSG #asahnoln :", "\r\n")
 		if text == "" {
 			continue
 		}
 
 		c <- aggr.Message{
 			Text: text,
-			User: findValue(msg, "display-name=", ";"),
+			User: findSubstrBetween(msg, "display-name=", ";"),
 		}
 	}
 }
 
-func findValue(msg string, name string, sep string) string {
-	start := strings.Index(msg, name)
+func connectToTwitch(url string) *websocket.Conn {
+	// FIX: Handle error
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatalf("ws dial err: %v", err)
+	}
+
+	sendConnectMsgsToTwitch(conn)
+	return conn
+}
+
+func sendConnectMsgsToTwitch(conn *websocket.Conn) {
+	for _, msg := range twitchConnectMsgs {
+		conn.WriteMessage(websocket.TextMessage, []byte(msg))
+	}
+}
+
+func findSubstrBetween(s string, fromSubstr string, toSubstr string) string {
+	start := strings.Index(s, fromSubstr)
 	if start == -1 {
 		return ""
 	}
 
-	start += len(name)
-	end := strings.Index(msg[start:], sep)
-	return msg[start:][:end]
+	start += len(fromSubstr)
+	end := strings.Index(s[start:], toSubstr)
+	return s[start:][:end]
 }

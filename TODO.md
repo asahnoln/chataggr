@@ -2,5 +2,7 @@
 
 - [x] aggr.run([]receivers, channel)
 - [ ] twitch receiver
-- [ ] tiktok recevier
+- [x] tiktok recevier
 - [ ] play sound on message received
+- [ ] Unhappy paths
+- [ ] Handle errors
