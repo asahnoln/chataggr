@@ -9,7 +9,6 @@ import (
 )
 
 func TestTiktok(t *testing.T) {
-	t.SkipNow()
 	c := make(chan aggr.Message)
 	r := receivers.NewTikTok("tiktok url")
 

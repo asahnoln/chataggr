@@ -11,4 +11,6 @@ func NewTikTok(url string) *TikTok {
 }
 
 func (r *TikTok) Receive(c chan aggr.Message) {
+	c <- aggr.Message{User: "someone", Text: "Hi Tik"}
+	c <- aggr.Message{}
 }
