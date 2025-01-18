@@ -42,6 +42,7 @@ func (r *TikTok) Receive(c chan aggr.Message) {
 		log.Print("AAAAA")
 		log.Fatalf("webcast do err: %v", err)
 	}
+	// TODO: Parse protobuf for wrss param
 	b, _ := io.ReadAll(resp.Body)
 	defer resp.Body.Close()
 	log.Printf("webcast resp: %v", resp)
