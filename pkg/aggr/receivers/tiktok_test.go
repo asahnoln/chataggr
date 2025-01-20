@@ -13,7 +13,7 @@ import (
 
 func TestTikTokIntegration(t *testing.T) {
 	c := make(chan aggr.Message, 100)
-	r := receivers.NewTikTok("https://webcast.tiktok.com/webcast/im/fetch/?version_code=180800&device_platform=web&cookie_enabled=true&screen_width=1920&screen_height=1200&browser_language=en-US&browser_platform=Win32&browser_name=Mozilla&browser_version=5.0%20(Windows)&browser_online=true&tz_name=Asia/Qyzylorda&aid=1988&app_name=tiktok_web&live_id=12&version_code=270000&debug=false&app_language=en&room_id=7461612599882550021&identity=audience&history_comment_count=6&fetch_rule=1&last_rtt=-1&cursor=0&internal_ext=0&sup_ws_ds_opt=1&resp_content_type=protobuf&did_rule=3&msToken=iGBZkBmusTct0DYjUQUy91TY23l8cfDQnqpJT6ZtZtDXTx7aM3NjY4RwQNJolDFw6KpYJFQntMSfnL6OdCIM95Ho-t8_AT37oOHI50AFNaglmDlJxOcYUuBgBoE2YJRZWUDEyZEqOdW8QRtiMkSv6g==&X-Bogus=DFSzsIVYczhANcYTtpEtKn2J46KT&_signature=_02B4Z6wo00001WKa1AgAAIDCjS0T8VNQ8VFimNCAAD8u22")
+	r := receivers.NewTikTok("https://webcast.tiktok.com/webcast/im/fetch/?version_code=180800&device_platform=web&cookie_enabled=true&screen_width=1920&screen_height=1200&browser_language=en-US&browser_platform=Win32&browser_name=Mozilla&browser_version=5.0%20(Windows)&browser_online=true&tz_name=Asia/Qyzylorda&aid=1988&app_name=tiktok_web&live_id=12&version_code=270000&debug=false&app_language=en&room_id=7461984576673843974&identity=audience&history_comment_count=6&fetch_rule=1&last_rtt=-1&cursor=0&internal_ext=0&sup_ws_ds_opt=1&resp_content_type=protobuf&did_rule=3&msToken=awJxSgYETZELnLx0W_4t_n1Ku6AqI3pr7uOwzG0nb5HFPeKinZ1Bo_1N72nDdVDlJ-8ARb7yQum-Jo4fMTTex3yzgGhJxwi78PTu7mdZk5p1WnYdhW6moImR4ZsVIoxaFnipmZcMENDRIJEmgIKV7A==&X-Bogus=DFSzsIVO42JANa7UtpO2Gw2J46s3&_signature=_02B4Z6wo00001IdK92wAAIDDaP0wlbVNcxCHSPPAAEZh2f")
 	r.Receive(c)
 }
 
