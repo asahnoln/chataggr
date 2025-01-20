@@ -1,10 +1,13 @@
 package receivers
 
 import (
+	"encoding/hex"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
+	"time"
 
 	"github.com/asahnoln/chataggr/pkg/aggr"
 	chataggr "github.com/asahnoln/chataggr/proto"
@@ -117,6 +120,17 @@ func (r *TikTok) Receive(c chan aggr.Message) {
 	defer resp.Body.Close()
 	log.Printf("ws resp: %s", b)
 
+	ping := time.Tick(10 * time.Second)
+	hx, err := hex.DecodeString("3A026862")
+	if err != nil {
+		log.Fatalf("hex decoding err: %v", err)
+	}
+	go func() {
+		for range ping {
+			conn.WriteMessage(websocket.BinaryMessage, hx)
+		}
+	}()
+
 	for {
 		_, data, err := conn.ReadMessage()
 		if err != nil {
@@ -124,12 +138,12 @@ func (r *TikTok) Receive(c chan aggr.Message) {
 			return
 		}
 
+		fmt.Printf("tiktok msg: %s\n", data)
 		log.Printf("tiktok msg: %s", data)
 
-		// c <- aggr.Message{
-		// 	Text: text,
-		// 	User: findSubstrBetween(msg, "display-name=", ";"),
-		// }
+		c <- aggr.Message{
+			Text: string(data),
+		}
 	}
 
 	// c <- aggr.Message{User: "someone", Text: "Hi Tik"}
