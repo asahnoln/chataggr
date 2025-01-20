@@ -241,6 +241,883 @@ func (x *WebsocketParam) GetValue() string {
 	return ""
 }
 
+type WebcastWebsocketMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Type          string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
+	Binary        []byte                 `protobuf:"bytes,8,opt,name=binary,proto3" json:"binary,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WebcastWebsocketMessage) Reset() {
+	*x = WebcastWebsocketMessage{}
+	mi := &file_proto_tiktok_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WebcastWebsocketMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WebcastWebsocketMessage) ProtoMessage() {}
+
+func (x *WebcastWebsocketMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WebcastWebsocketMessage.ProtoReflect.Descriptor instead.
+func (*WebcastWebsocketMessage) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *WebcastWebsocketMessage) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *WebcastWebsocketMessage) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *WebcastWebsocketMessage) GetBinary() []byte {
+	if x != nil {
+		return x.Binary
+	}
+	return nil
+}
+
+type WebcastChatMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Event         *WebcastMessageEvent   `protobuf:"bytes,1,opt,name=event,proto3" json:"event,omitempty"`
+	User          *User                  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	Comment       string                 `protobuf:"bytes,3,opt,name=comment,proto3" json:"comment,omitempty"`
+	Emotes        []*WebcastSubEmote     `protobuf:"bytes,13,rep,name=emotes,proto3" json:"emotes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WebcastChatMessage) Reset() {
+	*x = WebcastChatMessage{}
+	mi := &file_proto_tiktok_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WebcastChatMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WebcastChatMessage) ProtoMessage() {}
+
+func (x *WebcastChatMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WebcastChatMessage.ProtoReflect.Descriptor instead.
+func (*WebcastChatMessage) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *WebcastChatMessage) GetEvent() *WebcastMessageEvent {
+	if x != nil {
+		return x.Event
+	}
+	return nil
+}
+
+func (x *WebcastChatMessage) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *WebcastChatMessage) GetComment() string {
+	if x != nil {
+		return x.Comment
+	}
+	return ""
+}
+
+func (x *WebcastChatMessage) GetEmotes() []*WebcastSubEmote {
+	if x != nil {
+		return x.Emotes
+	}
+	return nil
+}
+
+type WebcastMessageEvent struct {
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	MsgId         uint64                      `protobuf:"varint,2,opt,name=msgId,proto3" json:"msgId,omitempty"`
+	CreateTime    uint64                      `protobuf:"varint,4,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	EventDetails  *WebcastMessageEventDetails `protobuf:"bytes,8,opt,name=eventDetails,proto3" json:"eventDetails,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WebcastMessageEvent) Reset() {
+	*x = WebcastMessageEvent{}
+	mi := &file_proto_tiktok_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WebcastMessageEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WebcastMessageEvent) ProtoMessage() {}
+
+func (x *WebcastMessageEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WebcastMessageEvent.ProtoReflect.Descriptor instead.
+func (*WebcastMessageEvent) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *WebcastMessageEvent) GetMsgId() uint64 {
+	if x != nil {
+		return x.MsgId
+	}
+	return 0
+}
+
+func (x *WebcastMessageEvent) GetCreateTime() uint64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+func (x *WebcastMessageEvent) GetEventDetails() *WebcastMessageEventDetails {
+	if x != nil {
+		return x.EventDetails
+	}
+	return nil
+}
+
+// Contains UI information
+type WebcastMessageEventDetails struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DisplayType   string                 `protobuf:"bytes,1,opt,name=displayType,proto3" json:"displayType,omitempty"`
+	Label         string                 `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WebcastMessageEventDetails) Reset() {
+	*x = WebcastMessageEventDetails{}
+	mi := &file_proto_tiktok_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WebcastMessageEventDetails) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WebcastMessageEventDetails) ProtoMessage() {}
+
+func (x *WebcastMessageEventDetails) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WebcastMessageEventDetails.ProtoReflect.Descriptor instead.
+func (*WebcastMessageEventDetails) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *WebcastMessageEventDetails) GetDisplayType() string {
+	if x != nil {
+		return x.DisplayType
+	}
+	return ""
+}
+
+func (x *WebcastMessageEventDetails) GetLabel() string {
+	if x != nil {
+		return x.Label
+	}
+	return ""
+}
+
+type User struct {
+	state          protoimpl.MessageState  `protogen:"open.v1"`
+	UserId         uint64                  `protobuf:"varint,1,opt,name=userId,proto3" json:"userId,omitempty"`
+	Nickname       string                  `protobuf:"bytes,3,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	ProfilePicture *ProfilePicture         `protobuf:"bytes,9,opt,name=profilePicture,proto3" json:"profilePicture,omitempty"`
+	UniqueId       string                  `protobuf:"bytes,38,opt,name=uniqueId,proto3" json:"uniqueId,omitempty"`
+	SecUid         string                  `protobuf:"bytes,46,opt,name=secUid,proto3" json:"secUid,omitempty"`
+	Badges         []*UserBadgesAttributes `protobuf:"bytes,64,rep,name=badges,proto3" json:"badges,omitempty"`
+	CreateTime     uint64                  `protobuf:"varint,16,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	BioDescription string                  `protobuf:"bytes,5,opt,name=bioDescription,proto3" json:"bioDescription,omitempty"`
+	FollowInfo     *FollowInfo             `protobuf:"bytes,22,opt,name=followInfo,proto3" json:"followInfo,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_proto_tiktok_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *User) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *User) GetNickname() string {
+	if x != nil {
+		return x.Nickname
+	}
+	return ""
+}
+
+func (x *User) GetProfilePicture() *ProfilePicture {
+	if x != nil {
+		return x.ProfilePicture
+	}
+	return nil
+}
+
+func (x *User) GetUniqueId() string {
+	if x != nil {
+		return x.UniqueId
+	}
+	return ""
+}
+
+func (x *User) GetSecUid() string {
+	if x != nil {
+		return x.SecUid
+	}
+	return ""
+}
+
+func (x *User) GetBadges() []*UserBadgesAttributes {
+	if x != nil {
+		return x.Badges
+	}
+	return nil
+}
+
+func (x *User) GetCreateTime() uint64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+func (x *User) GetBioDescription() string {
+	if x != nil {
+		return x.BioDescription
+	}
+	return ""
+}
+
+func (x *User) GetFollowInfo() *FollowInfo {
+	if x != nil {
+		return x.FollowInfo
+	}
+	return nil
+}
+
+type ProfilePicture struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Urls          []string               `protobuf:"bytes,1,rep,name=urls,proto3" json:"urls,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProfilePicture) Reset() {
+	*x = ProfilePicture{}
+	mi := &file_proto_tiktok_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProfilePicture) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProfilePicture) ProtoMessage() {}
+
+func (x *ProfilePicture) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProfilePicture.ProtoReflect.Descriptor instead.
+func (*ProfilePicture) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ProfilePicture) GetUrls() []string {
+	if x != nil {
+		return x.Urls
+	}
+	return nil
+}
+
+type UserBadgesAttributes struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	BadgeSceneType    int32                  `protobuf:"varint,3,opt,name=badgeSceneType,proto3" json:"badgeSceneType,omitempty"`
+	ImageBadges       []*UserImageBadge      `protobuf:"bytes,20,rep,name=imageBadges,proto3" json:"imageBadges,omitempty"`
+	Badges            []*UserBadge           `protobuf:"bytes,21,rep,name=badges,proto3" json:"badges,omitempty"`
+	PrivilegeLogExtra *PrivilegeLogExtra     `protobuf:"bytes,12,opt,name=privilegeLogExtra,proto3" json:"privilegeLogExtra,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *UserBadgesAttributes) Reset() {
+	*x = UserBadgesAttributes{}
+	mi := &file_proto_tiktok_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserBadgesAttributes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserBadgesAttributes) ProtoMessage() {}
+
+func (x *UserBadgesAttributes) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserBadgesAttributes.ProtoReflect.Descriptor instead.
+func (*UserBadgesAttributes) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UserBadgesAttributes) GetBadgeSceneType() int32 {
+	if x != nil {
+		return x.BadgeSceneType
+	}
+	return 0
+}
+
+func (x *UserBadgesAttributes) GetImageBadges() []*UserImageBadge {
+	if x != nil {
+		return x.ImageBadges
+	}
+	return nil
+}
+
+func (x *UserBadgesAttributes) GetBadges() []*UserBadge {
+	if x != nil {
+		return x.Badges
+	}
+	return nil
+}
+
+func (x *UserBadgesAttributes) GetPrivilegeLogExtra() *PrivilegeLogExtra {
+	if x != nil {
+		return x.PrivilegeLogExtra
+	}
+	return nil
+}
+
+type FollowInfo struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	FollowingCount int32                  `protobuf:"varint,1,opt,name=followingCount,proto3" json:"followingCount,omitempty"`
+	FollowerCount  int32                  `protobuf:"varint,2,opt,name=followerCount,proto3" json:"followerCount,omitempty"`
+	FollowStatus   int32                  `protobuf:"varint,3,opt,name=followStatus,proto3" json:"followStatus,omitempty"`
+	PushStatus     int32                  `protobuf:"varint,4,opt,name=pushStatus,proto3" json:"pushStatus,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *FollowInfo) Reset() {
+	*x = FollowInfo{}
+	mi := &file_proto_tiktok_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FollowInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FollowInfo) ProtoMessage() {}
+
+func (x *FollowInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FollowInfo.ProtoReflect.Descriptor instead.
+func (*FollowInfo) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *FollowInfo) GetFollowingCount() int32 {
+	if x != nil {
+		return x.FollowingCount
+	}
+	return 0
+}
+
+func (x *FollowInfo) GetFollowerCount() int32 {
+	if x != nil {
+		return x.FollowerCount
+	}
+	return 0
+}
+
+func (x *FollowInfo) GetFollowStatus() int32 {
+	if x != nil {
+		return x.FollowStatus
+	}
+	return 0
+}
+
+func (x *FollowInfo) GetPushStatus() int32 {
+	if x != nil {
+		return x.PushStatus
+	}
+	return 0
+}
+
+type UserImageBadge struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DisplayType   int32                  `protobuf:"varint,1,opt,name=displayType,proto3" json:"displayType,omitempty"`
+	Image         *UserImageBadgeImage   `protobuf:"bytes,2,opt,name=image,proto3" json:"image,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserImageBadge) Reset() {
+	*x = UserImageBadge{}
+	mi := &file_proto_tiktok_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserImageBadge) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserImageBadge) ProtoMessage() {}
+
+func (x *UserImageBadge) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserImageBadge.ProtoReflect.Descriptor instead.
+func (*UserImageBadge) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UserImageBadge) GetDisplayType() int32 {
+	if x != nil {
+		return x.DisplayType
+	}
+	return 0
+}
+
+func (x *UserImageBadge) GetImage() *UserImageBadgeImage {
+	if x != nil {
+		return x.Image
+	}
+	return nil
+}
+
+type UserBadge struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserBadge) Reset() {
+	*x = UserBadge{}
+	mi := &file_proto_tiktok_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserBadge) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserBadge) ProtoMessage() {}
+
+func (x *UserBadge) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserBadge.ProtoReflect.Descriptor instead.
+func (*UserBadge) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *UserBadge) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *UserBadge) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type UserImageBadgeImage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserImageBadgeImage) Reset() {
+	*x = UserImageBadgeImage{}
+	mi := &file_proto_tiktok_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserImageBadgeImage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserImageBadgeImage) ProtoMessage() {}
+
+func (x *UserImageBadgeImage) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserImageBadgeImage.ProtoReflect.Descriptor instead.
+func (*UserImageBadgeImage) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *UserImageBadgeImage) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+type WebcastSubEmote struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	PlaceInComment int32                  `protobuf:"varint,1,opt,name=placeInComment,proto3" json:"placeInComment,omitempty"` //starting at 0, you insert the emote itself into the comment at that place
+	Emote          *EmoteDetails          `protobuf:"bytes,2,opt,name=emote,proto3" json:"emote,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *WebcastSubEmote) Reset() {
+	*x = WebcastSubEmote{}
+	mi := &file_proto_tiktok_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WebcastSubEmote) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WebcastSubEmote) ProtoMessage() {}
+
+func (x *WebcastSubEmote) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WebcastSubEmote.ProtoReflect.Descriptor instead.
+func (*WebcastSubEmote) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *WebcastSubEmote) GetPlaceInComment() int32 {
+	if x != nil {
+		return x.PlaceInComment
+	}
+	return 0
+}
+
+func (x *WebcastSubEmote) GetEmote() *EmoteDetails {
+	if x != nil {
+		return x.Emote
+	}
+	return nil
+}
+
+type EmoteDetails struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	EmoteId       string                 `protobuf:"bytes,1,opt,name=emoteId,proto3" json:"emoteId,omitempty"`
+	Image         *EmoteImage            `protobuf:"bytes,2,opt,name=image,proto3" json:"image,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EmoteDetails) Reset() {
+	*x = EmoteDetails{}
+	mi := &file_proto_tiktok_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EmoteDetails) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EmoteDetails) ProtoMessage() {}
+
+func (x *EmoteDetails) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EmoteDetails.ProtoReflect.Descriptor instead.
+func (*EmoteDetails) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *EmoteDetails) GetEmoteId() string {
+	if x != nil {
+		return x.EmoteId
+	}
+	return ""
+}
+
+func (x *EmoteDetails) GetImage() *EmoteImage {
+	if x != nil {
+		return x.Image
+	}
+	return nil
+}
+
+type PrivilegeLogExtra struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PrivilegeId   string                 `protobuf:"bytes,2,opt,name=privilegeId,proto3" json:"privilegeId,omitempty"`
+	Level         string                 `protobuf:"bytes,5,opt,name=level,proto3" json:"level,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PrivilegeLogExtra) Reset() {
+	*x = PrivilegeLogExtra{}
+	mi := &file_proto_tiktok_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PrivilegeLogExtra) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PrivilegeLogExtra) ProtoMessage() {}
+
+func (x *PrivilegeLogExtra) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PrivilegeLogExtra.ProtoReflect.Descriptor instead.
+func (*PrivilegeLogExtra) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *PrivilegeLogExtra) GetPrivilegeId() string {
+	if x != nil {
+		return x.PrivilegeId
+	}
+	return ""
+}
+
+func (x *PrivilegeLogExtra) GetLevel() string {
+	if x != nil {
+		return x.Level
+	}
+	return ""
+}
+
+type EmoteImage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ImageUrl      string                 `protobuf:"bytes,1,opt,name=imageUrl,proto3" json:"imageUrl,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EmoteImage) Reset() {
+	*x = EmoteImage{}
+	mi := &file_proto_tiktok_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EmoteImage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EmoteImage) ProtoMessage() {}
+
+func (x *EmoteImage) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_tiktok_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EmoteImage.ProtoReflect.Descriptor instead.
+func (*EmoteImage) Descriptor() ([]byte, []int) {
+	return file_proto_tiktok_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *EmoteImage) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
+}
+
 var File_proto_tiktok_proto protoreflect.FileDescriptor
 
 var file_proto_tiktok_proto_rawDesc = []byte{
@@ -276,9 +1153,121 @@ var file_proto_tiktok_proto_rawDesc = []byte{
 	0x0a, 0x0e, 0x57, 0x65, 0x62, 0x73, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d,
 	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
 	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x12, 0x5a, 0x10, 0x2e, 0x2f,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x3b, 0x63, 0x68, 0x61, 0x74, 0x61, 0x67, 0x67, 0x72, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x55, 0x0a, 0x17, 0x57, 0x65,
+	0x62, 0x63, 0x61, 0x73, 0x74, 0x57, 0x65, 0x62, 0x73, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x4d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x07, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x62, 0x69, 0x6e,
+	0x61, 0x72, 0x79, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x06, 0x62, 0x69, 0x6e, 0x61, 0x72,
+	0x79, 0x22, 0xb4, 0x01, 0x0a, 0x12, 0x57, 0x65, 0x62, 0x63, 0x61, 0x73, 0x74, 0x43, 0x68, 0x61,
+	0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x31, 0x0a, 0x05, 0x65, 0x76, 0x65, 0x6e,
+	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x54, 0x69, 0x6b, 0x54, 0x6f, 0x6b,
+	0x2e, 0x57, 0x65, 0x62, 0x63, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x52, 0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x20, 0x0a, 0x04, 0x75,
+	0x73, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x54, 0x69, 0x6b, 0x54,
+	0x6f, 0x6b, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x12, 0x18, 0x0a,
+	0x07, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x2f, 0x0a, 0x06, 0x65, 0x6d, 0x6f, 0x74, 0x65,
+	0x73, 0x18, 0x0d, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x54, 0x69, 0x6b, 0x54, 0x6f, 0x6b,
+	0x2e, 0x57, 0x65, 0x62, 0x63, 0x61, 0x73, 0x74, 0x53, 0x75, 0x62, 0x45, 0x6d, 0x6f, 0x74, 0x65,
+	0x52, 0x06, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x73, 0x22, 0x93, 0x01, 0x0a, 0x13, 0x57, 0x65, 0x62,
+	0x63, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74,
+	0x12, 0x14, 0x0a, 0x05, 0x6d, 0x73, 0x67, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x05, 0x6d, 0x73, 0x67, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x54, 0x69, 0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x63, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x46, 0x0a, 0x0c, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x44,
+	0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x54,
+	0x69, 0x6b, 0x54, 0x6f, 0x6b, 0x2e, 0x57, 0x65, 0x62, 0x63, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73,
+	0x52, 0x0c, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x22, 0x54,
+	0x0a, 0x1a, 0x57, 0x65, 0x62, 0x63, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x45, 0x76, 0x65, 0x6e, 0x74, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x20, 0x0a, 0x0b,
+	0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0b, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x79, 0x70, 0x65, 0x12, 0x14,
+	0x0a, 0x05, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6c,
+	0x61, 0x62, 0x65, 0x6c, 0x22, 0xe0, 0x02, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x12, 0x16, 0x0a,
+	0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x75,
+	0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x6e, 0x69, 0x63, 0x6b, 0x6e, 0x61, 0x6d,
+	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6e, 0x69, 0x63, 0x6b, 0x6e, 0x61, 0x6d,
+	0x65, 0x12, 0x3e, 0x0a, 0x0e, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x50, 0x69, 0x63, 0x74,
+	0x75, 0x72, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x54, 0x69, 0x6b, 0x54,
+	0x6f, 0x6b, 0x2e, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x50, 0x69, 0x63, 0x74, 0x75, 0x72,
+	0x65, 0x52, 0x0e, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x50, 0x69, 0x63, 0x74, 0x75, 0x72,
+	0x65, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x49, 0x64, 0x18, 0x26, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x49, 0x64, 0x12, 0x16, 0x0a,
+	0x06, 0x73, 0x65, 0x63, 0x55, 0x69, 0x64, 0x18, 0x2e, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73,
+	0x65, 0x63, 0x55, 0x69, 0x64, 0x12, 0x34, 0x0a, 0x06, 0x62, 0x61, 0x64, 0x67, 0x65, 0x73, 0x18,
+	0x40, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x54, 0x69, 0x6b, 0x54, 0x6f, 0x6b, 0x2e, 0x55,
+	0x73, 0x65, 0x72, 0x42, 0x61, 0x64, 0x67, 0x65, 0x73, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75,
+	0x74, 0x65, 0x73, 0x52, 0x06, 0x62, 0x61, 0x64, 0x67, 0x65, 0x73, 0x12, 0x1e, 0x0a, 0x0a, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x10, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x26, 0x0a, 0x0e, 0x62,
+	0x69, 0x6f, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0e, 0x62, 0x69, 0x6f, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74,
+	0x69, 0x6f, 0x6e, 0x12, 0x32, 0x0a, 0x0a, 0x66, 0x6f, 0x6c, 0x6c, 0x6f, 0x77, 0x49, 0x6e, 0x66,
+	0x6f, 0x18, 0x16, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x54, 0x69, 0x6b, 0x54, 0x6f, 0x6b,
+	0x2e, 0x46, 0x6f, 0x6c, 0x6c, 0x6f, 0x77, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0a, 0x66, 0x6f, 0x6c,
+	0x6c, 0x6f, 0x77, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x24, 0x0a, 0x0e, 0x50, 0x72, 0x6f, 0x66, 0x69,
+	0x6c, 0x65, 0x50, 0x69, 0x63, 0x74, 0x75, 0x72, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x72, 0x6c,
+	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x04, 0x75, 0x72, 0x6c, 0x73, 0x22, 0xec, 0x01,
+	0x0a, 0x14, 0x55, 0x73, 0x65, 0x72, 0x42, 0x61, 0x64, 0x67, 0x65, 0x73, 0x41, 0x74, 0x74, 0x72,
+	0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x12, 0x26, 0x0a, 0x0e, 0x62, 0x61, 0x64, 0x67, 0x65, 0x53,
+	0x63, 0x65, 0x6e, 0x65, 0x54, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e,
+	0x62, 0x61, 0x64, 0x67, 0x65, 0x53, 0x63, 0x65, 0x6e, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x38,
+	0x0a, 0x0b, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x42, 0x61, 0x64, 0x67, 0x65, 0x73, 0x18, 0x14, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x54, 0x69, 0x6b, 0x54, 0x6f, 0x6b, 0x2e, 0x55, 0x73, 0x65,
+	0x72, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x42, 0x61, 0x64, 0x67, 0x65, 0x52, 0x0b, 0x69, 0x6d, 0x61,
+	0x67, 0x65, 0x42, 0x61, 0x64, 0x67, 0x65, 0x73, 0x12, 0x29, 0x0a, 0x06, 0x62, 0x61, 0x64, 0x67,
+	0x65, 0x73, 0x18, 0x15, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x54, 0x69, 0x6b, 0x54, 0x6f,
+	0x6b, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x42, 0x61, 0x64, 0x67, 0x65, 0x52, 0x06, 0x62, 0x61, 0x64,
+	0x67, 0x65, 0x73, 0x12, 0x47, 0x0a, 0x11, 0x70, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65, 0x67, 0x65,
+	0x4c, 0x6f, 0x67, 0x45, 0x78, 0x74, 0x72, 0x61, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19,
+	0x2e, 0x54, 0x69, 0x6b, 0x54, 0x6f, 0x6b, 0x2e, 0x50, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65, 0x67,
+	0x65, 0x4c, 0x6f, 0x67, 0x45, 0x78, 0x74, 0x72, 0x61, 0x52, 0x11, 0x70, 0x72, 0x69, 0x76, 0x69,
+	0x6c, 0x65, 0x67, 0x65, 0x4c, 0x6f, 0x67, 0x45, 0x78, 0x74, 0x72, 0x61, 0x22, 0x9e, 0x01, 0x0a,
+	0x0a, 0x46, 0x6f, 0x6c, 0x6c, 0x6f, 0x77, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x26, 0x0a, 0x0e, 0x66,
+	0x6f, 0x6c, 0x6c, 0x6f, 0x77, 0x69, 0x6e, 0x67, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x0e, 0x66, 0x6f, 0x6c, 0x6c, 0x6f, 0x77, 0x69, 0x6e, 0x67, 0x43, 0x6f,
+	0x75, 0x6e, 0x74, 0x12, 0x24, 0x0a, 0x0d, 0x66, 0x6f, 0x6c, 0x6c, 0x6f, 0x77, 0x65, 0x72, 0x43,
+	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0d, 0x66, 0x6f, 0x6c, 0x6c,
+	0x6f, 0x77, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x66, 0x6f, 0x6c,
+	0x6c, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x0c, 0x66, 0x6f, 0x6c, 0x6c, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1e, 0x0a,
+	0x0a, 0x70, 0x75, 0x73, 0x68, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x0a, 0x70, 0x75, 0x73, 0x68, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x65, 0x0a,
+	0x0e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x42, 0x61, 0x64, 0x67, 0x65, 0x12,
+	0x20, 0x0a, 0x0b, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x79, 0x70, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x54, 0x79, 0x70,
+	0x65, 0x12, 0x31, 0x0a, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1b, 0x2e, 0x54, 0x69, 0x6b, 0x54, 0x6f, 0x6b, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6d,
+	0x61, 0x67, 0x65, 0x42, 0x61, 0x64, 0x67, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x05, 0x69,
+	0x6d, 0x61, 0x67, 0x65, 0x22, 0x33, 0x0a, 0x09, 0x55, 0x73, 0x65, 0x72, 0x42, 0x61, 0x64, 0x67,
+	0x65, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x27, 0x0a, 0x13, 0x55, 0x73, 0x65,
+	0x72, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x42, 0x61, 0x64, 0x67, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65,
+	0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75,
+	0x72, 0x6c, 0x22, 0x65, 0x0a, 0x0f, 0x57, 0x65, 0x62, 0x63, 0x61, 0x73, 0x74, 0x53, 0x75, 0x62,
+	0x45, 0x6d, 0x6f, 0x74, 0x65, 0x12, 0x26, 0x0a, 0x0e, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x49, 0x6e,
+	0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e, 0x70,
+	0x6c, 0x61, 0x63, 0x65, 0x49, 0x6e, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x2a, 0x0a,
+	0x05, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x54,
+	0x69, 0x6b, 0x54, 0x6f, 0x6b, 0x2e, 0x45, 0x6d, 0x6f, 0x74, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69,
+	0x6c, 0x73, 0x52, 0x05, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x22, 0x52, 0x0a, 0x0c, 0x45, 0x6d, 0x6f,
+	0x74, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6d, 0x6f,
+	0x74, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x65, 0x6d, 0x6f, 0x74,
+	0x65, 0x49, 0x64, 0x12, 0x28, 0x0a, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x12, 0x2e, 0x54, 0x69, 0x6b, 0x54, 0x6f, 0x6b, 0x2e, 0x45, 0x6d, 0x6f, 0x74,
+	0x65, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x22, 0x4b, 0x0a,
+	0x11, 0x50, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65, 0x67, 0x65, 0x4c, 0x6f, 0x67, 0x45, 0x78, 0x74,
+	0x72, 0x61, 0x12, 0x20, 0x0a, 0x0b, 0x70, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65, 0x67, 0x65, 0x49,
+	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x70, 0x72, 0x69, 0x76, 0x69, 0x6c, 0x65,
+	0x67, 0x65, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x65, 0x76, 0x65, 0x6c, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x6c, 0x65, 0x76, 0x65, 0x6c, 0x22, 0x28, 0x0a, 0x0a, 0x45, 0x6d,
+	0x6f, 0x74, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x69, 0x6d, 0x61, 0x67,
+	0x65, 0x55, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x69, 0x6d, 0x61, 0x67,
+	0x65, 0x55, 0x72, 0x6c, 0x42, 0x12, 0x5a, 0x10, 0x2e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x3b,
+	0x63, 0x68, 0x61, 0x74, 0x61, 0x67, 0x67, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -293,20 +1282,48 @@ func file_proto_tiktok_proto_rawDescGZIP() []byte {
 	return file_proto_tiktok_proto_rawDescData
 }
 
-var file_proto_tiktok_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_proto_tiktok_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_proto_tiktok_proto_goTypes = []any{
-	(*WebcastResponse)(nil), // 0: TikTok.WebcastResponse
-	(*Message)(nil),         // 1: TikTok.Message
-	(*WebsocketParam)(nil),  // 2: TikTok.WebsocketParam
+	(*WebcastResponse)(nil),            // 0: TikTok.WebcastResponse
+	(*Message)(nil),                    // 1: TikTok.Message
+	(*WebsocketParam)(nil),             // 2: TikTok.WebsocketParam
+	(*WebcastWebsocketMessage)(nil),    // 3: TikTok.WebcastWebsocketMessage
+	(*WebcastChatMessage)(nil),         // 4: TikTok.WebcastChatMessage
+	(*WebcastMessageEvent)(nil),        // 5: TikTok.WebcastMessageEvent
+	(*WebcastMessageEventDetails)(nil), // 6: TikTok.WebcastMessageEventDetails
+	(*User)(nil),                       // 7: TikTok.User
+	(*ProfilePicture)(nil),             // 8: TikTok.ProfilePicture
+	(*UserBadgesAttributes)(nil),       // 9: TikTok.UserBadgesAttributes
+	(*FollowInfo)(nil),                 // 10: TikTok.FollowInfo
+	(*UserImageBadge)(nil),             // 11: TikTok.UserImageBadge
+	(*UserBadge)(nil),                  // 12: TikTok.UserBadge
+	(*UserImageBadgeImage)(nil),        // 13: TikTok.UserImageBadgeImage
+	(*WebcastSubEmote)(nil),            // 14: TikTok.WebcastSubEmote
+	(*EmoteDetails)(nil),               // 15: TikTok.EmoteDetails
+	(*PrivilegeLogExtra)(nil),          // 16: TikTok.PrivilegeLogExtra
+	(*EmoteImage)(nil),                 // 17: TikTok.EmoteImage
 }
 var file_proto_tiktok_proto_depIdxs = []int32{
-	1, // 0: TikTok.WebcastResponse.messages:type_name -> TikTok.Message
-	2, // 1: TikTok.WebcastResponse.wsParams:type_name -> TikTok.WebsocketParam
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	1,  // 0: TikTok.WebcastResponse.messages:type_name -> TikTok.Message
+	2,  // 1: TikTok.WebcastResponse.wsParams:type_name -> TikTok.WebsocketParam
+	5,  // 2: TikTok.WebcastChatMessage.event:type_name -> TikTok.WebcastMessageEvent
+	7,  // 3: TikTok.WebcastChatMessage.user:type_name -> TikTok.User
+	14, // 4: TikTok.WebcastChatMessage.emotes:type_name -> TikTok.WebcastSubEmote
+	6,  // 5: TikTok.WebcastMessageEvent.eventDetails:type_name -> TikTok.WebcastMessageEventDetails
+	8,  // 6: TikTok.User.profilePicture:type_name -> TikTok.ProfilePicture
+	9,  // 7: TikTok.User.badges:type_name -> TikTok.UserBadgesAttributes
+	10, // 8: TikTok.User.followInfo:type_name -> TikTok.FollowInfo
+	11, // 9: TikTok.UserBadgesAttributes.imageBadges:type_name -> TikTok.UserImageBadge
+	12, // 10: TikTok.UserBadgesAttributes.badges:type_name -> TikTok.UserBadge
+	16, // 11: TikTok.UserBadgesAttributes.privilegeLogExtra:type_name -> TikTok.PrivilegeLogExtra
+	13, // 12: TikTok.UserImageBadge.image:type_name -> TikTok.UserImageBadgeImage
+	15, // 13: TikTok.WebcastSubEmote.emote:type_name -> TikTok.EmoteDetails
+	17, // 14: TikTok.EmoteDetails.image:type_name -> TikTok.EmoteImage
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_proto_tiktok_proto_init() }
@@ -320,7 +1337,7 @@ func file_proto_tiktok_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_tiktok_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

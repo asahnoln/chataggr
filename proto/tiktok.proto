@@ -27,3 +27,91 @@ message WebsocketParam {
   string value = 2;
 }
 
+message WebcastWebsocketMessage {
+  uint64 id = 2;
+  string type = 7;
+  bytes binary = 8;
+}
+
+message WebcastChatMessage {
+  WebcastMessageEvent event = 1;
+  User user = 2;
+  string comment = 3;
+  repeated WebcastSubEmote emotes = 13;
+}
+
+message WebcastMessageEvent {
+  uint64 msgId = 2;
+  uint64 createTime = 4;
+  WebcastMessageEventDetails eventDetails = 8;
+}
+
+// Contains UI information
+message WebcastMessageEventDetails {
+  string displayType = 1;
+  string label = 2;
+}
+
+message User {
+  uint64 userId = 1;
+  string nickname = 3;
+  ProfilePicture profilePicture = 9;
+  string uniqueId = 38;
+  string secUid = 46;
+  repeated UserBadgesAttributes badges = 64;
+  uint64 createTime = 16;
+  string bioDescription = 5;
+  FollowInfo followInfo = 22;
+}
+
+message ProfilePicture {
+  repeated string urls = 1;
+}
+
+message UserBadgesAttributes {
+  int32 badgeSceneType = 3;
+  repeated UserImageBadge imageBadges = 20;
+  repeated UserBadge badges = 21;
+  PrivilegeLogExtra privilegeLogExtra = 12;
+}
+
+message FollowInfo {
+  int32 followingCount = 1;
+  int32 followerCount = 2;
+  int32 followStatus = 3;
+  int32 pushStatus = 4;
+}
+
+message UserImageBadge {
+  int32 displayType = 1;
+  UserImageBadgeImage image = 2;
+}
+
+message UserBadge {
+  string type = 2;
+  string name = 3;
+}
+
+message UserImageBadgeImage {
+  string url = 1;
+}
+
+message WebcastSubEmote {
+ int32 placeInComment = 1; //starting at 0, you insert the emote itself into the comment at that place
+ EmoteDetails emote = 2;
+}
+
+message EmoteDetails {
+  string emoteId = 1;
+  EmoteImage image = 2;
+}
+
+message PrivilegeLogExtra {
+  string privilegeId = 2;
+  string level = 5;
+}
+
+message EmoteImage {
+  string imageUrl = 1;
+}
+

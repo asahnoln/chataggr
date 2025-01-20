@@ -2,7 +2,6 @@ package receivers
 
 import (
 	"encoding/hex"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -68,7 +67,6 @@ func (r *TikTok) Receive(c chan aggr.Message) {
 	if err := proto.Unmarshal(b, &wb); err != nil {
 		log.Fatalf("unmarshal proto err: %v", err)
 	}
-	log.Printf("webcast ws url and wrss: %v, %+v", wb.WsUrl, wb.WsParams)
 
 	hs := http.Header{}
 	// WARN: For now taking URL straight from browser
@@ -110,15 +108,10 @@ func (r *TikTok) Receive(c chan aggr.Message) {
 	// hs.Add("Connection", "keep-alive, Upgrade")
 	// hs.Add("Upgrade", "websocket")
 
-	log.Printf("ws url: %v", u.String())
-	conn, resp, err := websocket.DefaultDialer.Dial(u.String(), hs)
+	conn, _, err := websocket.DefaultDialer.Dial(u.String(), hs)
 	if err != nil {
-		log.Printf("ws resp: %+v", resp)
 		log.Fatalf("ws dial err: %v", err)
 	}
-	b, _ = io.ReadAll(resp.Body)
-	defer resp.Body.Close()
-	log.Printf("ws resp: %s", b)
 
 	ping := time.Tick(10 * time.Second)
 	hx, err := hex.DecodeString("3A026862")
@@ -138,8 +131,14 @@ func (r *TikTok) Receive(c chan aggr.Message) {
 			return
 		}
 
-		fmt.Printf("tiktok msg: %s\n", data)
 		log.Printf("tiktok msg: %s", data)
+
+		// TODO: Unmarshal WebcastWebsocketMessage
+		// TODO: Check for Type msg?
+		// TODO: Unmarshal WebcastResponse
+		// TODO: Read through Messages
+		// TODO: Unmarshal WebcastChatMessage (in future maybe others as well, like Gift)
+		// TODO: Use Chat data for our Message
 
 		c <- aggr.Message{
 			Text: string(data),
