@@ -5,6 +5,7 @@ package aggr
 // Message contains text from a chat
 type Message struct {
 	User, Text string
+	Receiver   Receiver
 }
 
 // Receiver is a chat service.
@@ -18,8 +19,8 @@ type Receiver interface {
 // Run launches all receivers in goroutines
 // so that they connect to their chats
 // and send parsed messages to the given channel
-func Run(mrs []Receiver, c chan Message) {
-	for _, m := range mrs {
-		go m.Receive(c)
+func Run(rs []Receiver, c chan Message) {
+	for _, r := range rs {
+		go r.Receive(c)
 	}
 }

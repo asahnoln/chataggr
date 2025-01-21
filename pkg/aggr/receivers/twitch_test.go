@@ -121,3 +121,38 @@ l:
 		t.Fatalf("want len %v, got %v", want, got)
 	}
 }
+
+func TestTwitchMessageHasReceiver(t *testing.T) {
+	upg := websocket.Upgrader{}
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		c, _ := upg.Upgrade(w, r, nil)
+		defer c.Close()
+
+		c.WriteMessage(websocket.TextMessage, []byte("@badge-info=;badges=broadcaster/1;client-nonce=30620c76bc7d8ba00c9fe4c4d81c5ef3;color=;display-name=TwitchDev;emotes=;first-msg=0;flags=;id=6fdb1223-9252-4ee3-b4dc-c0ac88c2b372;mod=0;returning-chatter=0;room-id=39182089;subscriber=0;tmi-sent-ts=1736906306256;turbo=0;user-id=39182089;user-type= :asahnoln!asahnoln@asahnoln.tmi.twitch.tv PRIVMSG #asahnoln :Hi chat\r\n"))
+	}))
+	defer srv.Close()
+
+	tw := receivers.NewTwitch(replaceHTTPWithWS(srv.URL))
+	c := make(chan aggr.Message)
+
+	go tw.Receive(c)
+
+	timer := time.NewTimer(1 * time.Millisecond)
+
+	var m aggr.Message
+
+l:
+	for {
+		select {
+		case m = <-c:
+		case <-timer.C:
+			break l
+		}
+	}
+
+	if got, want := m.Receiver, tw; got != want {
+		t.Errorf("want receiver %v, got %v", want, got)
+	}
+}
+
+// TODO: Test TikTok has Receiver

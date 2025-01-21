@@ -42,8 +42,9 @@ func (r *Twitch) Receive(c chan aggr.Message) {
 		}
 
 		c <- aggr.Message{
-			Text: text,
-			User: findSubstrBetween(msg, "display-name=", ";"),
+			Receiver: r,
+			Text:     text,
+			User:     findSubstrBetween(msg, "display-name=", ";"),
 		}
 	}
 }

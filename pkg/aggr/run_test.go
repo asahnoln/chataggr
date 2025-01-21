@@ -7,6 +7,8 @@ import (
 	"github.com/asahnoln/chataggr/pkg/aggr"
 )
 
+// TODO: Automatically add receivers to message
+
 func TestRun(t *testing.T) {
 	c := make(chan aggr.Message)
 	aggr.Run([]aggr.Receiver{
@@ -29,7 +31,7 @@ l:
 	}
 
 	if got, want := len(msgs), 3; got != want {
-		t.Errorf("want msg len %v, got %v", want, got)
+		t.Fatalf("want msg len %v, got %v", want, got)
 	}
 }
 

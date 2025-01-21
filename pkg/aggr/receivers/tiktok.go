@@ -158,8 +158,9 @@ func (r *TikTok) Receive(c chan aggr.Message) {
 			}
 
 			c <- aggr.Message{
-				Text: wcm.Comment,
-				User: wcm.User.Nickname,
+				Receiver: r,
+				Text:     wcm.Comment,
+				User:     wcm.User.Nickname,
 			}
 		}
 	}
