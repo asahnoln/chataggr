@@ -11,3 +11,4 @@
 - [ ] TT gift messages
 - [ ] TT automatically grab/build first link and cookie
 - [ ] Use table for messages (pretty print)
+- [ ] Twitch err: "ws read err: websocket: close 1006 (abnormal closure): unexpected EOF"
