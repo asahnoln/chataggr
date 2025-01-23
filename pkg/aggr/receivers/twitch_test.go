@@ -36,6 +36,15 @@ func TestTwitchWS(t *testing.T) {
 				t.Errorf("srv want msg %v, got %v", want, got)
 			}
 		}
+
+		c.WriteMessage(websocket.TextMessage, []byte("PING :tmi.twitch.tv"))
+		mt, message, _ := c.ReadMessage()
+		if got, want := mt, websocket.TextMessage; got != want {
+			t.Errorf("srv want msg %v, got %v", want, got)
+		}
+		if got, want := string(message), "PONG"; got != want {
+			t.Errorf("srv want msg %v, got %v", want, got)
+		}
 	}))
 	defer srv.Close()
 
@@ -122,6 +131,31 @@ l:
 	}
 }
 
+// func TestTwitchPing(t *testing.T) {
+// 	upg := websocket.Upgrader{}
+// 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+// 		c, _ := upg.Upgrade(w, r, nil)
+// 		defer c.Close()
+//
+// 		c.WriteMessage(websocket.TextMessage, []byte("PING :tmi.twitch.tv"))
+// 		mt, message, _ := c.ReadMessage()
+// 		if got, want := mt, websocket.TextMessage; got != want {
+// 			t.Errorf("srv want msg %v, got %v", want, got)
+// 		}
+// 		if got, want := string(message), "PONG"; got != want {
+// 			t.Errorf("srv want msg %v, got %v", want, got)
+// 		}
+// 	}))
+// 	defer srv.Close()
+//
+// 	tw := receivers.NewTwitch(replaceHTTPWithWS(srv.URL))
+// 	c := make(chan aggr.Message, 100)
+// 	go tw.Receive(c)
+//
+// 	// Don't
+// 	<-time.After(1 * time.Millisecond)
+// }
+
 func TestTwitchMessageHasReceiver(t *testing.T) {
 	upg := websocket.Upgrader{}
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -154,5 +188,3 @@ l:
 		t.Errorf("want receiver %v, got %v", want, got)
 	}
 }
-
-// TODO: Test TikTok has Receiver

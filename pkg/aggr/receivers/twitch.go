@@ -36,16 +36,34 @@ func (r *Twitch) Receive(c chan aggr.Message) {
 		}
 
 		msg := string(data)
-		text := findSubstrBetween(msg, "PRIVMSG #asahnoln :", "\r\n")
-		if text == "" {
+
+		if twitchPing(msg, conn) {
 			continue
 		}
 
-		c <- aggr.Message{
-			Receiver: r,
-			Text:     text,
-			User:     findSubstrBetween(msg, "display-name=", ";"),
-		}
+		r.sendChatMsg(msg, c)
+	}
+}
+
+func twitchPing(msg string, conn *websocket.Conn) bool {
+	if msg == "PING :tmi.twitch.tv" {
+		conn.WriteMessage(websocket.TextMessage, []byte("PONG"))
+		return true
+	}
+
+	return false
+}
+
+func (r *Twitch) sendChatMsg(msg string, c chan aggr.Message) {
+	text := findSubstrBetween(msg, "PRIVMSG #asahnoln :", "\r\n")
+	if text == "" {
+		return
+	}
+
+	c <- aggr.Message{
+		Receiver: r,
+		Text:     text,
+		User:     findSubstrBetween(msg, "display-name=", ";"),
 	}
 }
 

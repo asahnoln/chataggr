@@ -34,7 +34,7 @@ func TestTiktok(t *testing.T) {
 	aggr.Run([]aggr.Receiver{r}, c)
 
 	msgs := []aggr.Message{}
-	timer := time.NewTimer(10 * time.Second)
+	timer := time.NewTimer(1 * time.Millisecond)
 
 l:
 	for {
@@ -58,3 +58,5 @@ l:
 		t.Errorf("want %v, got %v", want, got)
 	}
 }
+
+// TODO: Test TikTok has Receiver
